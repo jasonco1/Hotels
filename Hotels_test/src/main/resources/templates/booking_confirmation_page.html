@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+<head th:replace="fragments :: html_head">
+<title>Hotel Results</title>
+</head>
+
+<header th:replace="fragments :: nav_bar"></header>
+
+<body>
+
+   <div class="container">
+    <h2 th:inline="text"> Your Booking Details </h2>
+    <hr /> 
+   </div>
+   
+   <div class="container">
+   <h3>Thank you for booking with us <span th:text=${customer.getFirst_name()}></span>!</h3>
+   <h4>
+   Your booking from <span th:text=${checkInDate}></span>
+   to <span th:text=${checkOutDate}></span>
+   for <span th:text=${numberOccupants}></span>
+   <span th:text="${numberOccupants == 1} ? 'Guest' : 'Guests' "></span>
+   is $<span th:text=${totalPrice}></span>.
+   <br><br>
+   <span class="moreInfo">To view more information on your booking or cancel your booking, please login.</span></h4>
+   </div>
+   
+
+   <div th:replace="fragments :: footer" class="text-center"></div>
+</body>
+</html>

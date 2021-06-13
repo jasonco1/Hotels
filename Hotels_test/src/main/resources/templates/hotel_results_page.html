@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+<head th:replace="fragments :: html_head">
+<title>Hotel Results</title>
+</head>
+
+<header th:replace="fragments :: nav_bar"></header>
+
+<body>
+
+   <div class="container">
+      <h2 th:inline="text"> Available hotels in <span th:text=${city}></span> 
+      from <span th:text=${checkInDate}></span> to <span th:text=${checkOutDate}></span> 
+      for <span th:text=${numberOccupants}> </span> <span th:text="${numberOccupants == 1} ? 'Guest' : 'Guests' "> </span>
+      </h2>
+    <hr /> 
+    
+   <div class="main">
+   <div class="listings" th:each="roomInfo : ${roomInfoList}"> 
+    <div class="listing_image"> 
+    <!--Conditional img import-->
+    <img th:if= "${roomInfo.room.bed_type == 'King' && roomInfo.room.number_of_beds == 1}" class="img_temp" src="/img/fancyroom_single_king.jpg" alt="singleK">
+    <img th:if= "${roomInfo.room.bed_type == 'Queen' && roomInfo.room.number_of_beds == 1}" class="img_temp" src="/img/room_single_queen.jpg" alt="singleQ">
+    <img th:if= "${roomInfo.room.bed_type == 'Queen' && roomInfo.room.number_of_beds == 2}" class="img_temp" src="/img/room_double_queen.jpg" alt="doubleQ">
+    <img th:if= "${roomInfo.room.bed_type == 'Single' && roomInfo.room.number_of_beds == 2}" class="img_temp" src="/img/room_double_single.jpg" alt="doubleS">
+    </div>
+    <div class="listing_content">
+        <h3 class="listing_title">
+   				<tr>
+   					<!-- Note: add room_desc or room_name -->
+   					<td>Single Suite,</td> 
+   					<td th:text="${roomInfo.room.number_of_beds}"></td>
+   					<td th:text="${roomInfo.room.bed_type}"></td>
+   					<td th:text="${roomInfo.room.number_of_beds == 1} ? 'Bed' : 'Beds' "> </td>
+   					<br>
+   				</tr>
+   				<div class="listing_text">
+   				Occupies up to <tr>
+   					<td th:text="${roomInfo.room.max_occupants}"></td> 
+   					<td th:text= "${roomInfo.room.max_occupants == 1} ? 'person' : 'people' ">
+   					</td></tr><br>
+   					<tr>
+   					<td th:text="${roomInfo.room.number_of_beds}"></td>
+   					<td th:text="${roomInfo.room.bed_type}"></td>
+   					<td th:text="${roomInfo.room.number_of_beds == 1} ? 'Bed' : 'Beds' "> </td>
+   					<br><br>
+   					</tr>
+   					<h4 class=listing_hotel_name th:text="${roomInfo.hotel.getName()}"></h4>
+   				<tr>
+   					<td th:text="${roomInfo.hotel.getStreet_address()}"></td>, 
+   					<td th:text="${roomInfo.hotel.getState()}"></td>,
+   					<td th:text="${roomInfo.hotel.getZip_code()}"></td>,
+   					<td th:text="${roomInfo.hotel.getCountry()}"></td>
+   				</tr>
+   				<br>
+   				Contact: <tr><td th:text="${roomInfo.hotel.getPhone()}"></td></tr>
+   				</div>
+   			</h3>
+   			<div class=listing_corner>
+   					$<tr><td th:text="${roomInfo.room.price_per_night}"></td> per night <br>
+   					<tr><br>		
+   					<form th:action="@{/hotels/checkout}" method="post">
+   					<input type="hidden" id="roomId" name="roomId" th:value=${roomInfo.room.getId()} />
+   					<button class="button button2" type="submit">Book Now</button>
+   					</form>
+   			</div>
+    </div>    
+</div>
+</div>
+  
+</body>
+<!--  div th:replace="fragments :: footer" class="text-center"></div> delete if cannot find a way to keep it from overlaying with rooms list -->
+</html>

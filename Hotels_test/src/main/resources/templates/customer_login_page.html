@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+<title>Hotel Login</title>
+</head>
+<header th:replace="fragments :: nav_bar"> </header>
+
+<body>
+	<div class="login">
+	 <h2> Login</h2>  
+      <form action="/hotels/myAccount" method="post">
+         <label for="username"> Email address:  </label><br>
+         <input type="text" id="username" name="username" placeholder="username@email.com"><br> 
+         <label for="password"> Password:  </label><br>
+         <input type="password" id="password" name="password" placeholder="password"><br><br>        
+         <button class="button button3" type="submit">Login</button>
+      </form>
+      <h5 style="text-align: center; color: rgb(255, 0, 0)" th:text="${invalid_login} ? 'Invalid login attempt. Please re-enter your credentials.' : '' "> </h5>
+      <br>
+      <p>Don't have an account?<a href="/hotels/signup"> Sign up Here</a></p>
+      <br><br>
+      </div>
+     
+</body>
+<div th:replace="fragments :: footer" class="text-center"></div>
+</html>

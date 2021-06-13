@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+<title>Account Creation</title>
+</head>
+
+<header th:replace="fragments :: nav_bar"> </header>
+
+<body>
+	<div class="signup">
+	 <h2> Create an account</h2>
+      <form action="/hotels/home" method="get">
+         <label for="email"> Email address:  </label><br>
+         <input type="text" id="email" name="email" placeholder="jodoe@csumb.edu"><br> 
+         <label for="password"> Password:  </label><br>
+         <input type="text" id="password" name="password" placeholder="password"><br>  
+         <label for="firstName"> First Name:  </label><br>
+         <input type="text" id="firstName" name="firstName" placeholder="John"><br>
+         <label for="lastName"> Last Name:  </label><br>
+         <input type="text" id="lastName" name="lastName" placeholder="Doe"><br> <br>     
+         <button class="button button4" type="submit">Create Account</button>
+      </form>
+      <br>
+      <p>Already have an account.<a href="/hotels/login"> Login</a></p>
+      <br><br>
+    </div>
+      
+
+
+   <div th:replace="fragments :: footer" class="text-center"></div>
+</body>
+</html>

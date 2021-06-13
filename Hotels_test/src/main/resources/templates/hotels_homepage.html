@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+<title>Hotels Home</title>
+</head>
+
+<header th:replace="fragments :: nav_bar"> </header>
+
+<body>
+
+   <div class="container">
+    <h4 style="font-weight: bold; color: #156bc1; font-size:2.9em; text-align: center"> Book a Hotel </h4>
+    <hr />
+    </div>
+    
+ <div class="homepage_image">
+  <div class="homepage_searchbar">
+  	<div class="searchbar_item_1">
+   		<div class="searchbar_item_1">
+   		<h3 style="color: gray; font-weight:bold; color: #156bc1;">Where to?</h3>
+   		</div>
+   	<div class="searchbar_item_2">	
+      <form action="/hotels/results" method="post">
+
+         <label for="city"> City:  </label>
+         <input type="text" id="city" name="city" placeholder="Monterey Bay"> 
+               
+          <label for ="occupants"> Guests: </label>
+          <select id="occupants" name="occupants"> 
+            <option value=1> 1 </option>
+            <option value=2> 2 </option>
+            <option value=3> 3 </option>
+            <option value=4> 4 </option>
+          </select>
+          <br><br>
+        
+         <div class="input-daterange input-group" id="datepicker">
+			<span class="input-group-addon">Check-in:</span>
+    		<input type="text" class="input-sm form-control" id="checkInDate" name="checkInDate" placeholder="6/01/2021" />
+    		<span class="input-group-addon">Check-out:</span>
+    		<input type="text" class="input-sm form-control" id="checkOutDate" name="checkOutDate" placeholder="6/07/2021" />
+		 </div>
+		 <br>
+	             
+      <script type="text/javascript">
+      $('#datepicker').datepicker({ 
+    	  orientation: "top auto"
+      });
+      </script>
+       
+         <button class="button button1" type="submit">Search</button>
+         <p style="text-align: center; color: #ed2939;" th:text="${no_results} ? 'Sorry, no available hotels were found. Please try a different city or date range.' : '' "> </p>
+      </form>
+   		</div>
+   	</div>
+   </div>
+   </div>
+
+</body>
+<!--  Place footer outside of <body> tags -->  
+<div th:replace="fragments :: footer" class="text-center"></div>
+</html>
